@@ -1,6 +1,8 @@
 import { Router } from "express";
 import * as pizzas from "./pizzas";
+import * as burgers from "./burgers";
 
 export const router = Router();
 
-router.use("/api", pizzas.router);
+router.use("/pizzas", pizzas.router);
+router.use("/burgers", burgers.router);
