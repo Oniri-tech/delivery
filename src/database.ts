@@ -18,3 +18,20 @@ export class PizzaModel extends Model {
     return "id";
   }
 }
+export class BurgerModel extends Model {
+  id!: number;
+  name!: string;
+  price!: number;
+
+  static get tableName() {
+    return "burgers";
+  }
+
+  static get idColumn() {
+    return "id";
+  }
+
+  static get burgerPrice(){
+    return "9.90";
+  }
+}
