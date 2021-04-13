@@ -35,8 +35,6 @@ export class BurgerModel extends Model {
     return "9.90";
   }
 }
-<<<<<<< HEAD
-=======
 
 export class EnpanadasModel extends Model {
   id!: number;
@@ -51,4 +49,3 @@ export class EnpanadasModel extends Model {
     return "id";
   }
 }
->>>>>>> dev
