@@ -35,3 +35,20 @@ export class BurgerModel extends Model {
     return "9.90";
   }
 }
+<<<<<<< HEAD
+=======
+
+export class EnpanadasModel extends Model {
+  id!: number;
+  name!: string;
+  description!: string;
+  price!: number;
+
+  static get tableName(){
+    return "enpanadas";
+  }
+  static get idColumn() {
+    return "id";
+  }
+}
+>>>>>>> dev

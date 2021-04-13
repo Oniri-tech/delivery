@@ -1,4 +1,5 @@
-import Knex from "knex";
+import * as Knex from "knex";
+
 
 export async function up(knex: Knex): Promise<void> {
   return knex.schema.createTable("pizzas", (table) => {
