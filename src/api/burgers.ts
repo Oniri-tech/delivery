@@ -24,3 +24,8 @@ router.post("/", async (req, res) => {
     .returning("*");
     res.json(burger);
 })
+
+router.delete("/:id", async (req, res) => {
+    const burger = await BurgerModel.query().where("id", req.params.id).del();
+    res.json(burger);
+})
