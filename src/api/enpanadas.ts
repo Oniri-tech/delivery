@@ -25,5 +25,10 @@ router.post("/", async (req, res) => {
     })
     .returning("*");
     res.json(enpanadas);
+});
 
+router.delete("/:id", async (req, res) => {
+    const enpanadas = await EnpanadasModel.query()
+    .where("id", req.params.id).del();
+    res.json(enpanadas);
 })
