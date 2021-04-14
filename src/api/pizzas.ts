@@ -8,6 +8,11 @@ router.get("/", async (req, res) => {
   res.json(pizzas);
 });
 
+router.get("/:id", async (req, res) => {
+  const pizza = await PizzaModel.query().where("id", req.params.id).first();
+  res.json(pizza);
+})
+
 router.post("/", async (req, res) => {
   const { name } = req.body;
   const pizza = await PizzaModel.query()

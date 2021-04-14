@@ -8,6 +8,11 @@ router.get("/", async (req, res) => {
     res.json(enpanadas);
 });
 
+router.get("/:id", async (req, res) => {
+    const enpanadas = await EnpanadasModel.query().where('id', req.params.id).first();
+    res.json(enpanadas);
+})
+
 router.post("/", async (req, res) => {
     const { name } = req.body;
     const { description } = req.body;
