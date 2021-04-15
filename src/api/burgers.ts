@@ -11,18 +11,27 @@ router.get("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
     const burger = await BurgerModel.query().where("id", req.params.id).first();
     res.json(burger);
-})
+});
 
 router.post("/", async (req, res) => {
     const { name } = req.body;
     const { price } = req.body;
-    const burger = await BurgerModel.query()
-    .insert({
-        name,
-        price
-    })
-    .returning("*");
-    res.json(burger);
+
+    if (typeof name != "string" || typeof price != "number" ) {
+        res.status(500);
+    }
+    try {
+        const burger = await BurgerModel.query()
+        .insert({
+            name,
+            price
+        })
+        .returning("*");
+        res.json(burger);
+    } catch (error) {
+        res.status(500).json({error: error.message});
+    }
+
 })
 
 router.delete("/:id", async (req, res) => {
