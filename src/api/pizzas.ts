@@ -15,12 +15,20 @@ router.get("/:id", async (req, res) => {
 
 router.post("/", async (req, res) => {
   const { name } = req.body;
-  const pizza = await PizzaModel.query()
+  if(typeof name != "string") {
+    res.status(500);
+  }
+  try {
+    const pizza = await PizzaModel.query()
     .insert({
       name,
     })
     .returning("*");
-  res.json(pizza);
+    res.json(pizza);  
+  } catch (error) {
+    res.status(500).json({error: error.message});
+  }
+
 });
 
 router.delete("/:id", async (req, res) => {

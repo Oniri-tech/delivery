@@ -17,14 +17,22 @@ router.post("/", async (req, res) => {
     const { name } = req.body;
     const { description } = req.body;
     const { price } = req.body;
-    const enpanadas = await EnpanadasModel.query()
-    .insert({
-        name,
-        description,
-        price
-    })
-    .returning("*");
-    res.json(enpanadas);
+    if (typeof name != "string" || typeof description != "string" || typeof price != "number" ) {
+        res.status(500);
+    }
+    try {
+        const enpanadas = await EnpanadasModel.query()
+        .insert({
+            name,
+            description,
+            price
+        })
+        .returning("*");
+        res.json(enpanadas);       
+    } catch (error) {
+        res.status(500).json({error: error.message});
+    }
+
 });
 
 router.delete("/:id", async (req, res) => {
