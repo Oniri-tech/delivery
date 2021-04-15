@@ -9,6 +9,8 @@ Model.knex(database);
 export class PizzaModel extends Model {
   id!: number;
   name!: string;
+  description!: string;
+  price!: number;
 
   static get tableName() {
     return "pizzas";
@@ -21,6 +23,7 @@ export class PizzaModel extends Model {
 export class BurgerModel extends Model {
   id!: number;
   name!: string;
+  description!: string;
   price!: number;
 
   static get tableName() {

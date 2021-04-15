@@ -5,7 +5,8 @@ export async function up(knex: Knex): Promise<void> {
     return knex.schema.createTable("burgers", (table) => {
         table.increments("id").unique().primary().notNullable();
         table.string("name").notNullable();
-        table.integer("price").notNullable();
+        table.string("description").notNullable();
+        table.float("price").notNullable();
     });
 }
 

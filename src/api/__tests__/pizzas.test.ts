@@ -28,7 +28,7 @@ describe("pizzas", () => {
     describe("post", () => {
         it("should add a new post in db when going in post method", async () => {
             const request = supertest(express().use(express.json()).use(router));
-            const response = await request.post("/").send({name: "test"});
+            const response = await request.post("/").send({name: "test", description: "c'est bon !", price: 9.50});
             expect(response.status).toBe(200);
         });
         it("should throw an error if param is missing when adding new pizza", async () => {
@@ -44,6 +44,30 @@ describe("pizzas", () => {
             expect(response2.status).toBe(500);
             const response3 = await request.post("/").send({name: 8.7});
             expect(response3.status).toBe(500);
+        });
+        it("should throw an error if description is not a string", async () => {
+            const request = supertest(express().use(express.json()).use(router));
+            const response1 = await request.post("/").send({name: "test", description: true, price: 8});
+            expect(response1.status).toBe(500);
+            const response2 = await request.post("/").send({name: "test", description: 1, price: 8});
+            expect(response2.status).toBe(500);
+            const response3 = await request.post("/").send({name: "test", description: 1.2, price: 8});
+            expect(response3.status).toBe(500);
+        });
+        it("should throw an error if price is not a number", async () => {
+            const request = supertest(express().use(express.json()).use(router));
+            const response1 = await request.post("/").send({name: "test", description: "c'est bon", price: "test"});
+            expect(response1.status).toBe(500);
+            const response2 = await request.post("/").send({name: "test", description: "c'est bon", price: true});
+            expect(response2.status).toBe(500);
+        });
+    });
+
+    describe("put", () => {
+        it("should return status 200", async () => {
+            const request = supertest(express().use(express.json()).use(router));
+            const response = await request.put("/1").send({name:"test2"});
+            expect(response.status).toBe(200);
         });
     });
 

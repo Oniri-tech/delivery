@@ -34,6 +34,21 @@ router.post("/", async (req, res) => {
     }
 
 });
+router.put("/:id", async (req, res) => {
+    try {
+        const enpanadas = await EnpanadasModel.query()
+        .where("id", req.params.id)
+        .update({
+            name : req.body.name,
+            description : req.body.description,
+            price : req.body.price,
+        })
+        .returning("*");
+        res.json(enpanadas);
+    } catch (error) {
+        res.status(500).json({error: error.message});
+    };
+});
 
 router.delete("/:id", async (req, res) => {
     const enpanadas = await EnpanadasModel.query()

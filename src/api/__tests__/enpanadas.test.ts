@@ -55,8 +55,6 @@ describe("enpanadas", () => {
             expect(response1.status).toBe(500);
             const response2 = await request.post("/").send({name: "test", description: "c'est bon", price: true});
             expect(response2.status).toBe(500);
-            const response3 = await request.post("/").send({name: "test", description: "c'est bon", price: 8.7});
-            expect(response3.status).toBe(500);
         });
         it("should throw an error if description is not a string", async () => {
             const request = supertest(express().use(express.json()).use(router));
@@ -68,6 +66,15 @@ describe("enpanadas", () => {
             expect(response3.status).toBe(500);
         });
     });
+
+    describe("put", () => {
+        it("should return status 200", async () => {
+            const request = supertest(express().use(express.json()).use(router));
+            const response = await request.put("/1").send({name:"test2"});
+            expect(response.status).toBe(200);
+        });
+    });
+    
     describe("delete", () => {
         it("should delete an enpanada when id is given in delete method", async () => {
             const request  = supertest(express().use(router));
